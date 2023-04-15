@@ -36,6 +36,7 @@ public class Robot extends TimedRobot {
   private static final String kDefaultAuto = "blank";
   private static final String kPreload = "preload only";
   private static final String kPreloadBackup = "preload backup";
+  private static final String kPreloadBackupBump = "preload backup bump";
   private static final String kChargeDock = "charge dock";
   private String m_autoSelected;
   public static boolean auton = false;
@@ -90,6 +91,7 @@ public class Robot extends TimedRobot {
 
     m_chooser.setDefaultOption("Blank Auto", kDefaultAuto);
     m_chooser.addOption("Preload Backup", kPreloadBackup);
+    m_chooser.addOption("Preload Backup Bump", kPreloadBackupBump);
     m_chooser.addOption("Preload charge dock", kChargeDock);
     m_chooser.addOption("Preload only", kPreload);
     SmartDashboard.putData("Auto choices", m_chooser);

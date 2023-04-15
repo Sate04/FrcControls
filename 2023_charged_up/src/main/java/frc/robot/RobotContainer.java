@@ -6,7 +6,9 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.Intake;
@@ -59,25 +61,54 @@ public class RobotContainer {
     // new JoystickButton(oi.driver, 1)
       // toggleWhenPressed(new InstantCommand(penetrator::score));
     new JoystickButton(oi.driver, 4)
-      .whenPressed(new InstantCommand(intake::toggle));
+      .onTrue(new InstantCommand(intake::toggle));
     new JoystickButton(oi.operator, 4)
-      .whenPressed(new InstantCommand(intake::toggle));
+      .onTrue(new InstantCommand(intake::toggle));
     // servo in out
     new JoystickButton(oi.driver, 2)
-      .toggleWhenPressed(new InstantCommand(penetrator::toggle));
+      .toggleOnTrue(new InstantCommand(penetrator::toggle));
     new JoystickButton(oi.operator, 2)
-      .toggleWhenPressed(new InstantCommand(penetrator::toggle));
+      .toggleOnTrue(new InstantCommand(penetrator::toggle));
 
     // new JoystickButton(oi.driver, 4)
       // .whileActiveContinuous(new InstantCommand(intake::run_intake_out));
       
     new JoystickButton(oi.driver, 5)
-      .toggleWhenPressed(new InstantCommand(intake::setIntakeLevel));
+      .toggleOnTrue(new InstantCommand(intake::setIntakeLevel));
     new JoystickButton(oi.operator, 5)
-      .toggleWhenPressed(new InstantCommand(intake::setIntakeLevel));
+      .toggleOnTrue(new InstantCommand(intake::setIntakeLevel));
     new JoystickButton(oi.operator, 6)
-      .toggleWhenPressed(new InstantCommand(elevator::elevatorPreset));
+      .toggleOnTrue(new InstantCommand(elevator::elevatorPreset));
 
     }
+
+  private static final String kDefaultAuto = "blank";
+  private static final String kPreload = "preload only";
+  private static final String kPreloadBackup = "preload backup";
+  private static final String kChargeDock = "charge dock";
+
+  public Command getAutonomousCommand(String m_autoSelected) {
+
+    
+    switch (m_autoSelected){
+      case(kDefaultAuto):
+        return new InstantCommand();
+      case(kPreloadBackup):
+        return new SequentialCommandGroup(
+        );
+      case(kPreload):
+        return new SequentialCommandGroup(
+          
+        );
+      case(kChargeDock):
+        return new SequentialCommandGroup(
+
+      );
+
+    }
+
+    return new InstantCommand();
+
+  }
 
 }
